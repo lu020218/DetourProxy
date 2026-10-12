@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Detour mark">
+  <!--
+    Monochrome glyph (no tile). Uses currentColor, so it can be tinted with CSS
+    `color:` — handy for a favicon, a toolbar badge, or a dark/light theme mark.
+  -->
+  <g fill="none" stroke="currentColor" stroke-width="9"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 96 V72 Q40 60 52 60 H84"/>
+  </g>
+  <path d="M78 48 L96 60 L78 72 Z" fill="currentColor"/>
+  <circle cx="40" cy="96" r="8" fill="currentColor"/>
+</svg>

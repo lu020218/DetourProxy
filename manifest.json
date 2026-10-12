@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Detour Proxy",
+  "version": "1.0.0",
+  "description": "Detour Proxy：将浏览器流量绕道经 LAN 内的 v2raya 代理端点转发（Chrome / Edge, Manifest V3）。",
+  "permissions": ["proxy", "storage"],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Detour Proxy",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

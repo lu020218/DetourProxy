@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detour Proxy</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <!--
+      Compact popup: status + enable/disable switch + mode quick-switch.
+      Full configuration (endpoint / bypass / PAC) lives on the separate
+      options page, opened via the "设置" button.
+    -->
+    <main id="popup-root" class="popup-root" role="main" aria-label="浏览器代理">
+      <!-- Header -->
+      <header class="popup-header">
+        <div class="popup-brand">
+          <span class="popup-logo" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="popupBrandBg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#5b86ff" />
+                  <stop offset="1" stop-color="#2f59d6" />
+                </linearGradient>
+              </defs>
+              <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#popupBrandBg)" />
+              <path d="M40 96 V72 Q40 60 52 60 H84" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M78 48 L96 60 L78 72 Z" fill="#fff" />
+              <circle cx="40" cy="96" r="8" fill="#fff" />
+            </svg>
+          </span>
+          <h1 class="popup-title">Detour Proxy</h1>
+        </div>
+        <button
+          type="button"
+          id="open-settings"
+          class="ghost icon-button"
+          aria-label="打开设置"
+          title="打开设置"
+        >
+          <span aria-hidden="true">⚙️</span>
+        </button>
+      </header>
+
+      <!-- Status + master switch card -->
+      <section
+        class="card status-card"
+        id="section-status"
+        aria-labelledby="section-status-label"
+      >
+        <h2 id="section-status-label" class="visually-hidden">代理状态</h2>
+
+        <div class="status-head">
+          <div class="status-state">
+            <span class="status-dot" id="status-indicator" aria-hidden="true"></span>
+            <span class="status-state-text" id="status-state-text">已禁用</span>
+          </div>
+
+          <label class="switch" for="enable-toggle">
+            <span class="visually-hidden">启用代理</span>
+            <input
+              type="checkbox"
+              id="enable-toggle"
+              name="enabled"
+              role="switch"
+              aria-checked="false"
+              aria-label="启用代理"
+            />
+            <span class="switch-track" aria-hidden="true">
+              <span class="switch-thumb"></span>
+            </span>
+          </label>
+        </div>
+
+        <dl class="status-list" aria-live="polite">
+          <div class="status-row">
+            <dt class="status-term">当前模式</dt>
+            <dd class="status-value" id="status-mode" data-field="mode">—</dd>
+          </div>
+          <div class="status-row" id="status-endpoint-row" hidden>
+            <dt class="status-term">代理端点</dt>
+            <dd class="status-value" id="status-endpoint" data-field="endpoint">—</dd>
+          </div>
+          <div class="status-row" id="status-pac-row" hidden>
+            <dt class="status-term" id="status-pac-term">PAC 来源</dt>
+            <dd class="status-value" id="status-pac" data-field="pac">—</dd>
+          </div>
+        </dl>
+
+        <!-- Proxy error / not-applied message (Req 7.1, 7.3) -->
+        <p
+          class="feedback-message error"
+          id="status-error"
+          data-field="error"
+          role="alert"
+          aria-live="assertive"
+          hidden
+        ></p>
+
+        <!-- Enable/disable operation feedback (Req 9.2) -->
+        <p
+          class="feedback-message"
+          id="toggle-feedback"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></p>
+      </section>
+
+      <!-- Mode quick-switch (Req 2, 9.3) -->
+      <section
+        class="card mode-card"
+        id="section-mode"
+        aria-labelledby="section-mode-label"
+      >
+        <h2 id="section-mode-label" class="section-heading">代理模式</h2>
+        <div class="mode-options" role="radiogroup" aria-label="代理模式选择">
+          <label class="mode-option" for="mode-system">
+            <input type="radio" id="mode-system" name="proxy-mode" value="System" />
+            <span class="mode-option-text">系统代理</span>
+          </label>
+          <label class="mode-option" for="mode-fixed">
+            <input type="radio" id="mode-fixed" name="proxy-mode" value="Fixed_Servers" />
+            <span class="mode-option-text">固定服务器</span>
+          </label>
+          <label class="mode-option" for="mode-pac">
+            <input type="radio" id="mode-pac" name="proxy-mode" value="PAC" />
+            <span class="mode-option-text">PAC</span>
+          </label>
+        </div>
+
+        <!-- Config-level message (e.g. "请先在设置中配置端点") (Req 2.5, 3.4, 9.4) -->
+        <p
+          class="validation-message"
+          id="mode-error"
+          data-field="config"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></p>
+      </section>
+
+      <!-- Footer link to full settings -->
+      <footer class="popup-footer">
+        <button type="button" id="open-settings-link" class="secondary full-width">
+          高级设置（端点 / 绕过列表 / PAC）
+        </button>
+      </footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

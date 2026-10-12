@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-zip/
+extension/
+branding/icons/
+branding/store/
+*.log
+.DS_Store
+/.kiro

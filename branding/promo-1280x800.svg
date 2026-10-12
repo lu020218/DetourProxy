@@ -1,0 +1,107 @@
+<svg width="1280" height="800" viewBox="0 0 1280 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lgBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f9ff" />
+      <stop offset="1" stop-color="#e7eeff" />
+    </linearGradient>
+    <linearGradient id="tileGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b86ff" />
+      <stop offset="1" stop-color="#2f59d6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#lgBg)" />
+
+  <!-- Faint oversized route motif -->
+  <g opacity="0.06" fill="none" stroke="#2f59d6" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 880 V560 Q120 440 240 440 H560" />
+  </g>
+
+  <!-- ===================== LEFT: brand + value ===================== -->
+  <!-- Logo tile -->
+  <g transform="translate(88 96) scale(0.62)">
+    <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#tileGrad)" />
+    <path d="M40 96 V72 Q40 60 52 60 H84" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M78 48 L96 60 L78 72 Z" fill="#ffffff" />
+    <circle cx="40" cy="96" r="8" fill="#ffffff" />
+  </g>
+  <text x="184" y="156" font-family="'Microsoft YaHei','PingFang SC',-apple-system,'Segoe UI',sans-serif" font-size="58" font-weight="700" fill="#16203a" letter-spacing="-1">Detour Proxy</text>
+
+  <text x="90" y="232" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="27" fill="#44506a">把浏览器流量「绕道」经你局域网内的 v2raya 代理端点转发</text>
+
+  <!-- Feature bullets -->
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="23" fill="#27324c">
+    <circle cx="100" cy="312" r="6" fill="#3b6df6" />
+    <text x="122" y="320">四种代理模式：直连 / 系统 / 固定服务器 / PAC</text>
+    <circle cx="100" cy="364" r="6" fill="#3b6df6" />
+    <text x="122" y="372">PAC 智能分流：国内网站直连，海外流量走代理</text>
+    <circle cx="100" cy="416" r="6" fill="#3b6df6" />
+    <text x="122" y="424">Chrome / Edge 一致 · 最小权限（仅 proxy + storage）</text>
+  </g>
+
+  <!-- Flow diagram: browser -> Detour -> v2raya/LAN -->
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="20">
+    <rect x="90" y="498" width="150" height="56" rx="14" fill="#ffffff" stroke="#cdd3df" />
+    <text x="165" y="533" text-anchor="middle" fill="#27324c">你的浏览器</text>
+
+    <path d="M252 526 H300" stroke="#3b6df6" stroke-width="4" stroke-linecap="round" />
+    <path d="M296 518 L312 526 L296 534 Z" fill="#3b6df6" />
+
+    <rect x="316" y="498" width="128" height="56" rx="14" fill="url(#tileGrad)" />
+    <text x="380" y="533" text-anchor="middle" fill="#ffffff" font-weight="700">Detour</text>
+
+    <path d="M456 526 H504" stroke="#3b6df6" stroke-width="4" stroke-linecap="round" />
+    <path d="M500 518 L516 526 L500 534 Z" fill="#3b6df6" />
+
+    <rect x="520" y="498" width="200" height="56" rx="14" fill="#ffffff" stroke="#cdd3df" />
+    <text x="620" y="533" text-anchor="middle" fill="#27324c">v2raya · 局域网</text>
+  </g>
+
+  <!-- ===================== RIGHT: popup mock ===================== -->
+  <!-- soft shadow -->
+  <rect x="824" y="166" width="380" height="486" rx="26" fill="#1b2a4a" opacity="0.10" />
+  <!-- card -->
+  <rect x="820" y="156" width="380" height="486" rx="26" fill="#ffffff" stroke="#e2e6ee" />
+
+  <!-- header -->
+  <g transform="translate(848 182) scale(0.2)">
+    <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#tileGrad)" />
+    <path d="M40 96 V72 Q40 60 52 60 H84" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M78 48 L96 60 L78 72 Z" fill="#ffffff" />
+    <circle cx="40" cy="96" r="8" fill="#ffffff" />
+  </g>
+  <text x="882" y="200" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#16203a">Detour Proxy</text>
+  <circle cx="1176" cy="194" r="13" fill="none" stroke="#cdd3df" stroke-width="2" />
+  <circle cx="1176" cy="194" r="3.5" fill="#8b93a3" />
+
+  <!-- status card -->
+  <rect x="844" y="222" width="332" height="120" rx="14" fill="#f8fafe" stroke="#e8ecf5" />
+  <circle cx="872" cy="252" r="9" fill="#1f9d57" opacity="0.18" />
+  <circle cx="872" cy="252" r="5" fill="#1f9d57" />
+  <text x="890" y="259" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#16203a">已启用</text>
+  <!-- toggle on -->
+  <rect x="1116" y="238" width="52" height="28" rx="14" fill="#1f9d57" />
+  <circle cx="1154" cy="252" r="11" fill="#ffffff" />
+  <!-- divider -->
+  <line x1="864" y1="284" x2="1156" y2="284" stroke="#e8ecf5" />
+  <text x="868" y="308" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#646c7e">当前模式</text>
+  <text x="1152" y="308" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#16203a">固定服务器</text>
+  <text x="868" y="330" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#646c7e">代理端点</text>
+  <text x="1152" y="330" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#16203a">192.168.0.13:20170 (SOCKS5)</text>
+
+  <!-- mode section -->
+  <text x="844" y="378" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#16203a">代理模式</text>
+  <!-- system (outline) -->
+  <rect x="844" y="392" width="332" height="46" rx="9" fill="#f1f3f8" stroke="#e2e6ee" stroke-width="1.5" />
+  <text x="1010" y="421" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" fill="#16203a">系统代理</text>
+  <!-- fixed (active) -->
+  <rect x="844" y="446" width="332" height="46" rx="9" fill="#3b6df6" />
+  <text x="1010" y="475" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="700" fill="#ffffff">固定服务器</text>
+  <!-- PAC (outline) -->
+  <rect x="844" y="500" width="332" height="46" rx="9" fill="#f1f3f8" stroke="#e2e6ee" stroke-width="1.5" />
+  <text x="1010" y="529" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" fill="#16203a">PAC</text>
+
+  <!-- footer button -->
+  <rect x="844" y="568" width="332" height="46" rx="9" fill="#ffffff" stroke="#cdd3df" stroke-width="1.5" />
+  <text x="1010" y="597" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#16203a">高级设置（端点 / 绕过列表 / PAC）</text>
+</svg>

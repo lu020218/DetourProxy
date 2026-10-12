@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detour Proxy · 设置</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main id="options-root" class="options-root" role="main" aria-label="浏览器代理设置">
+      <header class="options-header">
+        <span class="options-logo" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="optionsBrandBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5b86ff" />
+                <stop offset="1" stop-color="#2f59d6" />
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#optionsBrandBg)" />
+            <path d="M40 96 V72 Q40 60 52 60 H84" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M78 48 L96 60 L78 72 Z" fill="#fff" />
+            <circle cx="40" cy="96" r="8" fill="#fff" />
+          </svg>
+        </span>
+        <div class="options-heading-group">
+          <h1 class="options-title">Detour Proxy · 设置</h1>
+          <p class="options-subtitle">
+            配置代理端点、绕过列表与 PAC 脚本。启用、关闭与模式切换请在工具栏弹窗中操作。
+          </p>
+        </div>
+      </header>
+
+      <!-- Proxy_Endpoint 配置 (Req 1) -->
+      <section class="card settings-card" id="section-endpoint" aria-labelledby="section-endpoint-label">
+        <div class="card-head">
+          <h2 id="section-endpoint-label" class="section-heading">代理端点</h2>
+          <p class="section-sub">v2raya 暴露的代理主机、端口与协议。固定服务器模式将流量转发到此端点。</p>
+        </div>
+
+        <div class="field-grid">
+          <div class="field field-host">
+            <label class="field-label" for="host-input">主机地址</label>
+            <input
+              type="text"
+              id="host-input"
+              name="host"
+              autocomplete="off"
+              aria-describedby="host-error"
+              placeholder="例如 192.168.1.10"
+            />
+            <p class="validation-message" id="host-error" data-field="host" role="alert" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="field field-port">
+            <label class="field-label" for="port-input">端口</label>
+            <input
+              type="text"
+              inputmode="numeric"
+              id="port-input"
+              name="port"
+              autocomplete="off"
+              aria-describedby="port-error"
+              placeholder="1 - 65535"
+            />
+            <p class="validation-message" id="port-error" data-field="port" role="alert" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="field field-protocol">
+            <label class="field-label" for="protocol-select">协议</label>
+            <select id="protocol-select" name="protocol" aria-describedby="protocol-error">
+              <option value="SOCKS5">SOCKS5</option>
+              <option value="SOCKS4">SOCKS4</option>
+              <option value="HTTP">HTTP</option>
+              <option value="HTTPS">HTTPS</option>
+            </select>
+            <p class="validation-message" id="protocol-error" data-field="protocol" role="alert" aria-live="polite" hidden></p>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" id="save-endpoint">保存代理端点</button>
+        </div>
+        <p class="feedback-message" id="endpoint-feedback" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <!-- Bypass_List 配置 (Req 4) -->
+      <section class="card settings-card" id="section-bypass" aria-labelledby="section-bypass-label">
+        <div class="card-head">
+          <h2 id="section-bypass-label" class="section-heading">绕过列表</h2>
+          <p class="section-sub">这些主机将直接连接，不经过代理。每行一个条目。</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="bypass-input">绕过主机模式</label>
+          <textarea
+            id="bypass-input"
+            name="bypassList"
+            rows="6"
+            autocomplete="off"
+            aria-describedby="bypass-hint bypass-error"
+            placeholder="localhost&#10;127.0.0.1"
+          ></textarea>
+          <p id="bypass-hint" class="field-hint">每行一个条目，最多 100 个，每个条目 1–255 个字符。留空将使用默认列表 localhost / 127.0.0.1。</p>
+          <p class="validation-message" id="bypass-error" data-field="bypassList" role="alert" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" id="save-bypass">保存绕过列表</button>
+        </div>
+        <p class="feedback-message" id="bypass-feedback" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <!-- PAC 配置 (Req 2.4, 2.6, 2.7, 2.10, 2.11) -->
+      <section class="card settings-card" id="section-pac" aria-labelledby="section-pac-label">
+        <div class="card-head">
+          <h2 id="section-pac-label" class="section-heading">PAC 脚本</h2>
+          <p class="section-sub">用于 PAC 模式的代理自动配置。可使用远程 URL，或直接粘贴内联脚本内容。保存后即可在弹窗中切换到 PAC 模式。</p>
+        </div>
+
+        <fieldset class="pac-source-fieldset">
+          <legend id="pac-source-label" class="field-label">脚本来源</legend>
+          <div class="mode-options" role="radiogroup" aria-labelledby="pac-source-label">
+            <label class="mode-option" for="pac-source-url">
+              <input type="radio" id="pac-source-url" name="pac-source" value="url" checked />
+              <span class="mode-option-text">远程 URL</span>
+            </label>
+            <label class="mode-option" for="pac-source-inline">
+              <input type="radio" id="pac-source-inline" name="pac-source" value="inline" />
+              <span class="mode-option-text">内联脚本</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field" id="pac-url-field">
+          <label class="field-label" for="pac-url-input">PAC 脚本 URL</label>
+          <input
+            type="text"
+            id="pac-url-input"
+            name="pacUrl"
+            autocomplete="off"
+            aria-describedby="pac-error"
+            placeholder="例如 http://192.168.1.10/proxy.pac"
+          />
+          <p class="validation-message" id="pac-error" data-field="pacUrl" role="alert" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="field" id="pac-script-field" hidden>
+          <label class="field-label" for="pac-script-input">PAC 脚本内容</label>
+          <textarea
+            id="pac-script-input"
+            name="pacScript"
+            rows="10"
+            autocomplete="off"
+            aria-describedby="pac-script-hint pac-script-error"
+            placeholder="function FindProxyForURL(url, host) {&#10;  return &quot;SOCKS5 192.168.1.10:1080&quot;;&#10;}"
+          ></textarea>
+          <p id="pac-script-hint" class="field-hint">直接粘贴 PAC 脚本内容，最多 100000 个字符；脚本需包含 FindProxyForURL(url, host) 函数。</p>
+          <p class="validation-message" id="pac-script-error" data-field="pacScript" role="alert" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" id="save-pac">保存 PAC</button>
+        </div>
+        <p class="feedback-message" id="pac-feedback" role="status" aria-live="polite" hidden></p>
+      </section>
+    </main>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

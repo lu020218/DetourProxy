@@ -1,0 +1,128 @@
+/*
+ * popup.css — Layout for the compact popup surface.
+ *
+ * Shared tokens, reset and components live in theme.css (linked first). This
+ * file only handles the popup's own layout. The popup is a small fixed-width
+ * panel (no horizontal scroll), focused on status + the master enable switch
+ * + a mode quick-switch, with a button to the full settings page.
+ */
+
+body {
+  /* Compact popup width; stays comfortably within Chromium's popup bounds. */
+  width: 340px;
+  min-width: 320px;
+}
+
+.popup-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+/* Header ---------------------------------------------------- */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.popup-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.popup-logo {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.popup-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.icon-button {
+  font-size: 16px;
+  line-height: 1;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+/* Status card ----------------------------------------------- */
+.status-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.status-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.status-state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.status-state-text {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.status-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.status-term {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  flex: none;
+}
+
+.status-value {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* Mode card ------------------------------------------------- */
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+/* Footer ---------------------------------------------------- */
+.popup-footer {
+  display: flex;
+}
+
+.full-width {
+  width: 100%;
+}

@@ -1,0 +1,540 @@
+/*
+ * theme.css — Shared design system for the Browser Proxy Extension UI.
+ *
+ * Linked by both popup.html and options.html (as a sibling in the packaged
+ * extension). Provides design tokens, a base reset, and the shared component
+ * styles (buttons, switch, fields, segmented control, status pill, messages).
+ * Page-specific layout lives in popup.css / options.css.
+ *
+ * Theming: color tokens are defined on :root for the light theme and overridden
+ * under @media (prefers-color-scheme: dark) so the UI tracks the Browser-
+ * reported Color_Scheme (Req 9.8).
+ */
+
+/* ============================================================ *
+ * Design tokens — light theme (default)
+ * ============================================================ */
+:root {
+  color-scheme: light dark;
+
+  /* Surfaces */
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f3f8;
+  --color-border: #e2e6ee;
+  --color-border-strong: #cdd3df;
+
+  /* Text */
+  --color-text: #161a23;
+  --color-text-muted: #646c7e;
+  /* Darkened to ~4.6:1 on --color-surface so hint text meets WCAG AA (was #8b93a3 ≈ 3.2:1). */
+  --color-text-faint: #5f6675;
+  --color-text-inverse: #ffffff;
+
+  /* Brand / accent */
+  --color-accent: #3b6df6;
+  --color-accent-hover: #2f59d6;
+  --color-accent-soft: #e9f0ff;
+  --color-focus-ring: #3b6df6;
+
+  /* Semantic */
+  --color-on: #1f9d57;
+  --color-on-soft: #e4f7ec;
+  --color-off: #8b93a3;
+  --color-error: #d92d20;
+  --color-error-soft: #fdecea;
+  --color-warning: #b25e09;
+  --color-warning-soft: #fcf2e2;
+  --color-info: #2f59d6;
+  --color-info-soft: #e9f0ff;
+
+  /* Shape & rhythm */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  --shadow-sm: 0 1px 2px rgba(18, 22, 33, 0.06);
+  --shadow-md: 0 6px 18px rgba(18, 22, 33, 0.10);
+
+  /* Type scale */
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 19px;
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ============================================================ *
+ * Design tokens — dark theme (Req 9.8)
+ * ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14161c;
+    --color-surface: #1d2027;
+    --color-surface-muted: #24272f;
+    --color-border: #2e323b;
+    --color-border-strong: #3c414c;
+
+    --color-text: #eef0f4;
+    --color-text-muted: #a6adba;
+    /* Lightened to ~4.6:1 on dark --color-surface for AA-compliant hint text (was #7b8290 ≈ 4.0:1). */
+    --color-text-faint: #99a1b0;
+    --color-text-inverse: #14161c;
+
+    --color-accent: #6f97ff;
+    --color-accent-hover: #88a9ff;
+    --color-accent-soft: #21304f;
+    --color-focus-ring: #88a9ff;
+
+    --color-on: #45c97f;
+    --color-on-soft: #173427;
+    --color-off: #7b8290;
+    --color-error: #f87a70;
+    --color-error-soft: #3a1f1c;
+    --color-warning: #f0b15a;
+    --color-warning-soft: #36280f;
+    --color-info: #88a9ff;
+    --color-info-soft: #21304f;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ============================================================ *
+ * Base reset
+ * ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================================ *
+ * Cards & sections
+ * ============================================================ */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-heading {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.section-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ============================================================ *
+ * Form fields
+ * ============================================================ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.field-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.field-hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-faint);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 9px 11px;
+  font-size: var(--font-size-md);
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  word-break: break-word;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+textarea {
+  min-height: 84px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-soft);
+}
+
+/* ============================================================ *
+ * Buttons
+ * ============================================================ */
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 9px 16px;
+  font-size: var(--font-size-md);
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--color-text-inverse);
+  background-color: var(--color-accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease, transform 0.05s ease;
+}
+
+button:hover,
+.button:hover {
+  background-color: var(--color-accent-hover);
+}
+
+button:active,
+.button:active {
+  transform: translateY(1px);
+}
+
+button:disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.secondary,
+.button.secondary {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border-color: var(--color-border-strong);
+}
+
+button.secondary:hover,
+.button.secondary:hover {
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-accent);
+}
+
+button.ghost,
+.button.ghost {
+  color: var(--color-accent);
+  background-color: transparent;
+  border-color: transparent;
+  padding: 6px 8px;
+}
+
+button.ghost:hover,
+.button.ghost:hover {
+  background-color: var(--color-accent-soft);
+}
+
+/* ============================================================ *
+ * Switch (enable / disable) — Req 3, 9.2
+ * ============================================================ */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.switch input[type="checkbox"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.switch .switch-track {
+  width: 52px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-off);
+  transition: background-color 0.18s ease;
+  position: relative;
+  flex: none;
+}
+
+.switch .switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease;
+}
+
+.switch input:checked ~ .switch-track {
+  background-color: var(--color-on);
+}
+
+.switch input:checked ~ .switch-track .switch-thumb {
+  transform: translateX(22px);
+}
+
+.switch input:focus-visible ~ .switch-track {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ============================================================ *
+ * Segmented mode control — Req 9.3
+ * ============================================================ */
+.mode-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 12px;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  text-align: center;
+  color: var(--color-text);
+  background-color: var(--color-surface-muted);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.mode-option:hover {
+  border-color: var(--color-accent);
+}
+
+.mode-option input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Active mode = currently routing through this mode: accent FILL, distinct from
+ * every other option (Req 9.3). The JS-driven `.active` class is the primary
+ * mechanism. The `:has(input:checked)` enhancement lives in a SEPARATE rule so
+ * that, on browsers without `:has()` support, an unsupported selector cannot
+ * invalidate the whole grouped rule and drop the highlight. It also serves the
+ * options PAC-source selector, which highlights purely via the checked radio. */
+.mode-option.active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+}
+
+.mode-option:has(input:checked) {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+}
+
+/* Selected-but-pending mode = chosen for the enable switch while the proxy is
+ * OFF: an accent OUTLINE (no fill) so it stays visible (Req 9.3) yet reads as
+ * "will turn on", clearly different from the active fill above. */
+.mode-option.selected {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+/* ============================================================ *
+ * Status pill / dot
+ * ============================================================ */
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-off);
+  flex: none;
+}
+
+.status-dot.active {
+  background-color: var(--color-on);
+  box-shadow: 0 0 0 4px var(--color-on-soft);
+}
+
+.status-dot.error {
+  background-color: var(--color-error);
+  box-shadow: 0 0 0 4px var(--color-error-soft);
+}
+
+/* ============================================================ *
+ * Validation messages (Req 9.4) & feedback toasts (Req 9.2)
+ * ============================================================ */
+.validation-message {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-error);
+  word-break: break-word;
+}
+
+.validation-message:empty {
+  display: none;
+}
+
+.feedback-message {
+  margin: 0;
+  padding: 8px 11px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  border: 1px solid transparent;
+  word-break: break-word;
+}
+
+.feedback-message:empty {
+  display: none;
+}
+
+.feedback-message.success {
+  color: var(--color-on);
+  background-color: var(--color-on-soft);
+  border-color: var(--color-on);
+}
+
+.feedback-message.error {
+  color: var(--color-error);
+  background-color: var(--color-error-soft);
+  border-color: var(--color-error);
+}
+
+.feedback-message.warning {
+  color: var(--color-warning);
+  background-color: var(--color-warning-soft);
+  border-color: var(--color-warning);
+}
+
+.feedback-message.info {
+  color: var(--color-info);
+  background-color: var(--color-info-soft);
+  border-color: var(--color-info);
+}
+
+/* ============================================================ *
+ * Utilities
+ * ============================================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}

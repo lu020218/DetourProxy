@@ -1,0 +1,29 @@
+<svg width="440" height="280" viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="smBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a7bff" />
+      <stop offset="1" stop-color="#1f3aa6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="440" height="280" fill="url(#smBg)" />
+
+  <!-- Faint oversized route motif -->
+  <g opacity="0.13" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 320 V230 Q70 168 132 168 H250" />
+  </g>
+  <g opacity="0.13" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 70 V150 Q300 196 250 196 H150" />
+  </g>
+
+  <!-- Brand mark (white route) -->
+  <g transform="translate(188 40) scale(0.5)">
+    <path d="M40 96 V72 Q40 60 52 60 H84" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M78 48 L96 60 L78 72 Z" fill="#ffffff" />
+    <circle cx="40" cy="96" r="9" fill="#ffffff" />
+  </g>
+
+  <text x="220" y="168" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',-apple-system,'Segoe UI',sans-serif" font-size="42" font-weight="700" fill="#ffffff" letter-spacing="-0.5">Detour Proxy</text>
+  <text x="220" y="206" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" fill="#dbe6ff">浏览器流量绕道经局域网代理出口</text>
+  <text x="220" y="236" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#aebfe8">SOCKS5 / HTTP · PAC 国内外分流 · Chrome / Edge</text>
+</svg>

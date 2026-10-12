@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detour Proxy · 隐私政策 / Privacy Policy</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.7;
+        color: #1a1f2b;
+        background: #ffffff;
+      }
+      @media (prefers-color-scheme: dark) {
+        body { color: #e7eaf0; background: #14161c; }
+        a { color: #6f97ff; }
+        hr { border-color: #2e323b; }
+      }
+      h1 { font-size: 28px; margin-bottom: 4px; }
+      h2 { font-size: 20px; margin-top: 32px; }
+      .sub { color: #6b7488; margin-top: 0; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      hr { border: none; border-top: 1px solid #e2e6ee; margin: 40px 0; }
+      .updated { color: #6b7488; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <h1>Detour Proxy 隐私政策</h1>
+    <p class="sub">Privacy Policy</p>
+    <p class="updated">最后更新 / Last updated: 2026-07-01</p>
+
+    <h2>中文</h2>
+    <p>
+      Detour Proxy（下称「本扩展」）是一款用于配置浏览器代理、将流量转发到你自建的
+      LAN v2raya 代理端点的浏览器扩展。我们非常重视你的隐私。
+    </p>
+    <ul>
+      <li>
+        <strong>不收集数据</strong>：本扩展不收集、不上传、不出售、不与任何第三方共享
+        你的任何个人信息或浏览数据。
+      </li>
+      <li>
+        <strong>本地存储</strong>：你填写的代理端点（主机、端口、协议）、绕过列表和
+        PAC 配置，仅通过浏览器的 <code>chrome.storage</code> 保存在你本地设备上，
+        不会离开你的浏览器。
+      </li>
+      <li>
+        <strong>流量去向</strong>：本扩展只是按你的配置调用浏览器的
+        <code>chrome.proxy</code> 接口，把浏览器流量导向<strong>你自己部署的</strong>
+        v2raya 端点。本扩展本身不运行代理服务，也不经手、不记录你的流量内容。
+      </li>
+      <li>
+        <strong>权限</strong>：仅申请 <code>proxy</code>（读写浏览器代理设置）与
+        <code>storage</code>（本地保存配置）两项权限，不申请任何主机权限。
+      </li>
+      <li><strong>无远程服务器</strong>：本扩展没有自己的后端服务器，不进行任何遥测。</li>
+    </ul>
+
+    <hr />
+
+    <h2>English</h2>
+    <p>
+      Detour Proxy ("the Extension") is a browser extension that configures the
+      browser's proxy settings to route traffic to a v2raya proxy endpoint you
+      host yourself on your LAN. We take your privacy seriously.
+    </p>
+    <ul>
+      <li>
+        <strong>No data collection</strong>: The Extension does not collect,
+        transmit, sell or share any personal information or browsing data with
+        anyone.
+      </li>
+      <li>
+        <strong>Local storage only</strong>: Your proxy endpoint (host, port,
+        protocol), bypass list and PAC configuration are stored solely on your
+        device via <code>chrome.storage</code> and never leave your browser.
+      </li>
+      <li>
+        <strong>Traffic routing</strong>: The Extension only calls the browser's
+        <code>chrome.proxy</code> API to direct traffic to <strong>your own</strong>
+        v2raya endpoint. It does not run a proxy itself and never handles, reads
+        or logs the content of your traffic.
+      </li>
+      <li>
+        <strong>Permissions</strong>: Only <code>proxy</code> (read/write proxy
+        settings) and <code>storage</code> (save config locally) are requested;
+        no host permissions.
+      </li>
+      <li>
+        <strong>No remote servers</strong>: The Extension has no backend of its
+        own and performs no telemetry.
+      </li>
+    </ul>
+
+    <hr />
+    <p class="updated">
+      如有疑问，请通过项目仓库的 Issues 反馈 / For questions, please open an issue on
+      the project repository.
+    </p>
+  </body>
+</html>

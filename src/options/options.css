@@ -1,0 +1,108 @@
+/*
+ * options.css — Layout for the full settings (options) page.
+ *
+ * Shared tokens, reset and components live in theme.css (linked first). This
+ * file handles the options page's own layout: a centred column of setting
+ * cards that stays readable from a narrow 320px panel up to ~800px, with no
+ * horizontal scroll (Req 9.5).
+ */
+
+body {
+  min-width: 320px;
+  padding: var(--space-5) var(--space-4);
+}
+
+.options-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Header ---------------------------------------------------- */
+.options-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-bottom: var(--space-2);
+}
+
+.options-logo {
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.options-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.options-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.options-subtitle {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Setting cards --------------------------------------------- */
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.card-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Field layout: host wide, port/protocol narrow; wraps on small viewports. */
+.field-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-3);
+}
+
+@media (max-width: 480px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* PAC source selector: strip the native fieldset chrome. */
+.pac-source-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.pac-source-fieldset legend {
+  padding: 0;
+  margin-bottom: var(--space-1);
+}
+
+@media (max-width: 480px) {
+  .card-actions button {
+    width: 100%;
+  }
+}

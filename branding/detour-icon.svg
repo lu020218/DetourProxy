@@ -1,0 +1,22 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Detour">
+  <defs>
+    <linearGradient id="detourBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b86ff"/>
+      <stop offset="1" stop-color="#2f59d6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App tile (doubles as the extension/store icon) -->
+  <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#detourBg)"/>
+
+  <!-- Route: your device (bottom-left) detours up, turns, and exits to the internet -->
+  <path d="M40 96 V72 Q40 60 52 60 H84"
+        fill="none" stroke="#ffffff" stroke-width="9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Exit arrowhead -->
+  <path d="M78 48 L96 60 L78 72 Z" fill="#ffffff"/>
+
+  <!-- Origin node (your browser) -->
+  <circle cx="40" cy="96" r="8" fill="#ffffff"/>
+</svg>
